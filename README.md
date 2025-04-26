@@ -125,4 +125,4 @@ df_null_sum
 
 
 # RESULT:
-       # INCLUDE YOUR RESULT HERE
+Thus feature scaling and selection is performed.
