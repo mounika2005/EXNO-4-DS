@@ -5,13 +5,9 @@ data to a file.
 
 # ALGORITHM:
 STEP 1:Read the given Data.
-
 STEP 2:Clean the Data Set using Data Cleaning Process.
-
 STEP 3:Apply Feature Scaling for the feature in the data set.
-
 STEP 4:Apply Feature Selection for the feature in the data set.
-
 STEP 5:Save the data to the file.
 
 # FEATURE SCALING:
@@ -28,101 +24,281 @@ The feature selection techniques used are:
 3.Embedded Method
 
 # CODING AND OUTPUT:
-DEVELOPED BY :levaku lakshmi mounika
-
-REG NO :212223100026
 
 ```
- import pandas as pd
- from scipy import stats
- import numpy as np
-```
-```
- df=pd.read_csv("/content/bmi.csv")
- df.head()
-```
-![image](https://github.com/user-attachments/assets/caea494b-269e-4303-a994-a62cbdf15a9a)
-```
- df_null_sum=df.isnull().sum()
- df_null_sum
-```
-![image](https://github.com/user-attachments/assets/9ee1d1f4-35b3-49a8-ad82-d31aa16eb0b5)
-```
+import pandas as pd
+from scipy import stats
+import numpy as np
+df=pd.read_csv("/content/bmi.csv")
+
+df.head()
 df.dropna()
 ```
-![image](https://github.com/user-attachments/assets/92abe1ee-1f55-4bd2-a507-222fea9a938f)
+
+# Output
+
+
+![image](https://github.com/user-attachments/assets/26796ef2-3005-45ce-95a6-b106fd392acb)
+
 ```
-max_vals = np.max(np.abs(df[['Height', 'Weight']]), axis=0)
+max_vals=np.max(np.abs(df[['Height']]))
 max_vals
+max_vals1=np.max(np.abs(df[['Weight']]))
+max_vals1
+print("Height =",max_vals)
+print("Weight =",max_vals1)
 ```
-![image](https://github.com/user-attachments/assets/a948e606-6b02-496d-8dad-f731a27ee445)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/55dbc3d0-9865-45eb-8a87-023f05fe616c)
+
+
 ```
- from sklearn.preprocessing import StandardScaler
- df1=pd.read_csv("/content/bmi.csv")
- df1.head()
+df1=pd.read_csv("/content/bmi.csv")
+
+from sklearn.preprocessing import StandardScaler
+sc=StandardScaler()
+df1[['Height','Weight']]=sc.fit_transform(df1[['Height','Weight']])
+df1.head(10)
 ```
-![image](https://github.com/user-attachments/assets/5ca43d8d-70da-4f66-8b18-df21c00b503d)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/5bcec15b-1a05-4958-a4f1-53ef7b25423f)
+
+
 ```
- sc=StandardScaler()
- df1[['Height','Weight']]=sc.fit_transform(df1[['Height','Weight']])
- df1.head(10)
+from sklearn.preprocessing import MinMaxScaler
+scaler=MinMaxScaler()
+df[['Height','Weight']]=scaler.fit_transform(df[['Height','Weight']])
+df.head(10)
 ```
-![image](https://github.com/user-attachments/assets/4e3ac267-a3a5-4631-a117-50e7793e5c1d)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/602e8dbc-ff3e-498d-90f5-726c90685167)
+
 ```
- from sklearn.preprocessing import MinMaxScaler
- scaler=MinMaxScaler()
- df[['Height','Weight']]=scaler.fit_transform(df[['Height','Weight']])
- df.head(10)
+from sklearn.preprocessing import Normalizer
+df2=pd.read_csv("/content/bmi.csv")
+scaler=Normalizer()
+df[['Height','Weight']]=scaler.fit_transform(df[['Height','Weight']])
+df
 ```
-![image](https://github.com/user-attachments/assets/b0ed4a66-6881-40d5-a056-c755ecd51a0c)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/fcecfdaf-5b19-4077-8f8c-4861eb615e57)
+
+
 ```
- from sklearn.preprocessing import MaxAbsScaler
- scaler = MaxAbsScaler()
- df3=pd.read_csv("/content/bmi.csv")
- df3.head()
-```
-![image](https://github.com/user-attachments/assets/09b74579-051e-4156-8ddd-a64219f3e4b4)
-```
+df3=pd.read_csv("/content/bmi.csv")
+from sklearn.preprocessing import MaxAbsScaler
+scaler=MaxAbsScaler()
 df3[['Height','Weight']]=scaler.fit_transform(df3[['Height','Weight']])
 df3
 ```
-![image](https://github.com/user-attachments/assets/bc82bd07-b664-4bc2-a6e6-fe696e7d681c)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/2bb6e3b5-9ba6-4f33-9bd4-2baf211909ea)
+
+
 ```
-from sklearn.preprocessing import RobustScaler
-scaler = RobustScaler()
 df4=pd.read_csv("/content/bmi.csv")
-df4.head()
-```
-![image](https://github.com/user-attachments/assets/6a7d4eee-2fff-40e5-bca2-1b635a03fb16)
-```
+from sklearn.preprocessing import RobustScaler
+scaler=RobustScaler()
 df4[['Height','Weight']]=scaler.fit_transform(df4[['Height','Weight']])
 df4.head()
 ```
-![image](https://github.com/user-attachments/assets/c2d2083c-5f32-4a55-83d6-496b2f7a198a)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/64a7b2b4-aa65-4c0e-9443-0755f84e5459)
+
+
+## FEATURE SELECTION SUING KNN CLASSIFICATION
+
 ```
-df=pd.read_csv("/content/income(1) (1).csv")
-df.info()
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+data=pd.read_csv("/content/income.csv",na_values=[ " ?"])
+data
 ```
-![image](https://github.com/user-attachments/assets/a78c72ab-1e5b-47e1-b7e1-b8b9f3c5f392)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/b4671f97-d63b-4939-ab74-c4273929b6b1)
+
 ```
-df
+data.isnull().sum()
 ```
-![image](https://github.com/user-attachments/assets/1de34510-ac62-4f94-925f-3d0812f41afe)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/bdeae9ea-bd7e-4848-8a31-5e01828a4b53)
+
+
 ```
-df.info()
+missing=data[data.isnull().any(axis=1)]
+missing
 ```
-![image](https://github.com/user-attachments/assets/313775bf-5641-469f-851e-0f21a8cebb45)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/29252d99-a1fc-4f83-a02d-8ae603ff71f3)
+
+
 ```
-df_null_sum=df.isnull().sum()
-df_null_sum
+data2=data.dropna(axis=0)
+data2
 ```
-![image](https://github.com/user-attachments/assets/31b9e792-04cb-4554-b422-d3e7d8c8e7e7)
+
+# Output
+
+![image](https://github.com/user-attachments/assets/7c692a8d-0899-4aa0-b647-ac678147ddf8)
+
+
 ```
- categorical_columns = ['JobType', 'EdType', 'maritalstatus', 'occupation', 'relationship', 'race', 'gender', 'nativecountry']
- df[categorical_columns] = df[categorical_columns].astype('category')
- df[categorical_columns]
+sal=data["SalStat"]
+
+data2["SalStat"]=data["SalStat"].map({' less than or equal to 50,000':0,' greater than 50,000':1})
+print(data2['SalStat'])
 ```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/d972eb04-43fa-4f48-82f2-b1e1168c42e2)
+
+
+```
+sal2=data2['SalStat']
+
+dfs=pd.concat([sal,sal2],axis=1)
+dfs
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/8664b65a-b49b-489f-b9df-c7142f509ffa)
+
+
+```
+data2
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/6a8851da-2386-40be-9896-b1814ce88d1e)
+
+
+```
+new_data=pd.get_dummies(data2, drop_first=True)
+new_data
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/816396fa-8774-4688-a3b9-4c33af1c2be7)
+
+
+```
+columns_list=list(new_data.columns)
+print(columns_list)
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/a3cb21ed-bdc9-4c35-834d-b82e966ee336)
+
+
+```
+features=list(set(columns_list)-set(['SalStat']))
+print(features)
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/087ba919-bedc-4de6-b794-800c7d2e024a)
+
+
+```
+y=new_data['SalStat']
+print(y)
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/97a3d74f-51e0-4a1b-81c1-3a451c8ad990)
+
+```
+x=new_data[features].values
+print(x)
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/7f95e089-b012-4100-832b-62e608404dfe)
+
+
+```
+train_x,test_x,train_y,test_y=train_test_split(x,y,test_size=0.3,random_state=0)
+KNN_classifier=KNeighborsClassifier(n_neighbors = 5)
+KNN_classifier.fit(train_x,train_y)
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/89ab8fca-6aee-4dee-a018-1e92d8b9a3b1)
+
+
+```
+prediction=KNN_classifier.predict(test_x)
+
+confusionMatrix=confusion_matrix(test_y, prediction)
+print(confusionMatrix)
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/a5203713-c834-4b87-b546-cf02e4caf886)
+
+
+```
+import pandas as pd
+from sklearn.feature_selection import SelectKBest, mutual_info_classif, f_classif
+data= {
+    'Feature1' : [1,2,3,4,5],
+    'Feature2' : ['A','B','C','A','B'],
+    'Feature3' : [0,1,1,0,1],
+    'Target' : [0,1,1,0,1]
+}
+df=pd.DataFrame(data)
+
+X=df[['Feature1','Feature3']]
+y=df['Target']
+
+selector = SelectKBest(score_func= mutual_info_classif, k=1)
+X_new=selector.fit_transform(X,y)
+
+selected_feature_indices = selector.get_support(indices=True)
+selected_features = X.columns[selected_feature_indices]
+
+print("Selected Features:", selected_features)
+
+```
+
+# Output
+
+![image](https://github.com/user-attachments/assets/7aa7af4a-0334-45d7-81d1-713119c3e491)
 
 
 # RESULT:
-Thus feature scaling and selection is performed.
+   Thus, Feature selection and Feature scaling has been used on the given dataset.
