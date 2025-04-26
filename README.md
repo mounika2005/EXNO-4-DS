@@ -24,9 +24,9 @@ The feature selection techniques used are:
 3.Embedded Method
 
 # CODING AND OUTPUT:
-DEVELOPED BY :NARRA RAMYA
+DEVELOPED BY :Levaku lakshmi mounika
 
-REG NO :212223040128
+REG NO :212223100026
 
 ```
  import pandas as pd
